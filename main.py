@@ -49,27 +49,32 @@ class Admin(User):
         for i,u in enumerate(users):
             if user_name == u.get_user_name():
                 users.pop(i)
-                print(f"Пользователь {u.get_user_name} удален")
+                print(f"Пользователь {u.get_user_name()} удален")
                 break
 
     #вывод данных об админе
     def admin_info(self):
-        print(f"ID: {self.__id}, Имя: {self.__name}, уровень доступа: {self.__level}, уровень админа {self.__admin_level}")
+        print(f"ID: {self.__id}, Имя: {self.get_user_name()}, уровень доступа: {self._User__level}, уровень админа: {self.__admin_level}")
 
 #Тестирование
-admin = Admin('Суровый',"Высокий")
+admin = Admin("Суровый","Высокий")
 admin.admin_info()
-#Добавление пользователей
+# #Добавление пользователей
 admin.add_user("Вася")
 admin.add_user("Анна")
 admin.add_user("Коля")
 admin.add_user("Рита")
 
 #Вывод данных о пользователях
+print("Список пользователей:")
 for u in users: u.user_info()
 
-#Изменение имени пользователя
+# #Изменение имени пользователя
 users[2].change_user_name("Миша")
 
 #Удаление пользователя
 admin.remove_user("Вася")
+
+#Вывод данных о пользователях
+print("Список пользователей:")
+for u in users: u.user_info()
