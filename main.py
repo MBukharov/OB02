@@ -30,13 +30,13 @@ class User():
         print(f"Имя пользователя {old_name} заменено на {name}")
 
 class Admin(User):
-    def __init__(self,name,admin_level,level = 'admin'):
-        super().__init__(name,level)
+    def __init__(self,name,admin_level):
+        super().__init__(name,level='admin')
         self.__admin_level = admin_level
-        self.__d = self.__generate_id()
+        self.__id = self.__generate_id()
 
     def __generate_id(self):
-        return super().__generate_id()
+        return int("".join(random.choices('0123456789',k=5)))
 
     #Добавление нового пользователя
     def add_user(self,name):
