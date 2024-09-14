@@ -19,9 +19,15 @@ class User():
     def get_user_id(self):
         return self.__id
 
+    # получение имени пользователя
+    def get_user_name(self):
+        return self.__name
+
     #Изменение имени пользователя
-    def set_user_name(self,name):
+    def change_user_name(self,name):
+        old_name = self.__name
         self.__name = name
+        print(f"Имя пользователя {old_name} заменено на {name}")
 
 class Admin(User):
     def __init__(self,name,admin_level,level = 'admin'):
@@ -39,10 +45,31 @@ class Admin(User):
         print(f"Новый пользователь ID = {u.get_user_id()} добавлен")
 
     #удаление пользователя
-    def remove_user(self,user_id):
-        for i,u enumerate(users):
-            if user_id == u.get_user_id():
+    def remove_user(self,user_name):
+        for i,u in enumerate(users):
+            if user_name == u.get_user_name():
                 users.pop(i)
-                print(f"Пользователь ID = {u.get_user_id} удален")
+                print(f"Пользователь {u.get_user_name} удален")
                 break
 
+    #вывод данных об админе
+    def admin_info(self):
+        print(f"ID: {self.__id}, Имя: {self.__name}, уровень доступа: {self.__level}, уровень админа {self.__admin_level}")
+
+#Тестирование
+admin = Admin('Суровый',"Высокий")
+admin.admin_info()
+#Добавление пользователей
+admin.add_user("Вася")
+admin.add_user("Анна")
+admin.add_user("Коля")
+admin.add_user("Рита")
+
+#Вывод данных о пользователях
+for u in users: u.user_info()
+
+#Изменение имени пользователя
+users[2].change_user_name("Миша")
+
+#Удаление пользователя
+admin.remove_user("Вася")
